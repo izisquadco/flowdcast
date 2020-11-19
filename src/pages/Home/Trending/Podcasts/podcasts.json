@@ -5,5 +5,21 @@
       "https://yt3.ggpht.com/a/AATXAJx4y3EbLBYR405vabr6Vu-uEmJT6c3bCvfmDhexFA=s512-c-k-c0x00ffffff-no-rj",
     "artist": "Flow",
     "disabled": false
+  },
+
+  {
+    "id": 2,
+    "avatar":
+      "https://yt3.ggpht.com/ytc/AAUvwniChRToD--JOEs8A18uXL3jSlsxAGpO2uUFdzbO=s512-c-k-c0x00ffffff-no-rj-mo",
+    "artist": "Podpah",
+    "disabled": true
+  },
+
+  {
+    "id": 3,
+    "avatar":
+      "https://yt3.ggpht.com/ytc/AAUvwniWjY-_QAlsa1cONZZlOzy1a0Uz_cj9kb34GcSK=s512-c-k-c0x00ffffff-no-rj",
+    "artist": "Master",
+    "disabled": true
   }
 ]
