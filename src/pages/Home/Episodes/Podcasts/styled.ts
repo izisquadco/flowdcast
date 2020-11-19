@@ -1,7 +1,9 @@
 import styled from 'styled-components/native'
 import { theme } from 'styled-tools'
 
-export const Container = styled.View``
+export const Container = styled.View`
+  margin-bottom: ${theme('spacing.lg.px')};
+`
 
 export const Wrapper = styled.FlatList``
 
@@ -18,5 +20,5 @@ export const Avatar = styled.Image`
 
 export const Artist = styled.Text`
   font-weight: 700;
-  color: #fff;
+  color: ${theme('colors.white')};
 `
