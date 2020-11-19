@@ -1,8 +1,7 @@
 import React, { useCallback, useContext } from 'react'
 import { ThemeContext } from 'styled-components'
-import { useNavigation } from '@react-navigation/native'
 
-import podcasts from './podcasts.json'
+import podcast from './podcast.json'
 
 import {
   Container,
@@ -14,31 +13,26 @@ import {
   Label,
 } from './styled'
 
-const Podcasts: React.FC = () => {
+const Profile: React.FC = () => {
   const theme = useContext(ThemeContext)
-  const navigation = useNavigation()
-
-  const handleNavigate = useCallback(() => {
-    navigation.navigate('Podcast')
-  }, [navigation])
 
   const keyExtractor = useCallback(({ id }) => String(id), [])
 
   const renderItem = useCallback(
-    ({ item: { avatar, artist, disabled } }) => (
-      <Podcast disabled={disabled} onPress={handleNavigate}>
+    ({ item: { avatar, artist } }) => (
+      <Podcast>
         <Avatar source={{ uri: avatar }} />
 
         <Artist>{artist}</Artist>
       </Podcast>
     ),
-    [handleNavigate],
+    [],
   )
 
   return (
     <Container>
       <Wrapper
-        data={podcasts}
+        data={podcast}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         contentContainerStyle={{
@@ -49,10 +43,10 @@ const Podcasts: React.FC = () => {
       />
 
       <Footer>
-        <Label>Em alta</Label>
+        <Label>Episódios</Label>
       </Footer>
     </Container>
   )
 }
 
-export default Podcasts
+export default Profile
