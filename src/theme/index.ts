@@ -1,8 +1,9 @@
 export default {
   colors: {
-    background: '#14111f',
-    foreground: '#1f222c',
+    background: '#181818',
+    foreground: '#383838',
     placeholder: '#656a73',
+    ripple: '#333',
     white: '#fff',
     black: '#000',
   },
