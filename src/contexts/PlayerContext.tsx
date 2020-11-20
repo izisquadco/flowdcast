@@ -21,6 +21,7 @@ interface PlayerContextProps {
   currentTrack: Track | null
   play: (track?: Track) => void
   pause: () => void
+  seekTo: (amount?: number) => void
 }
 
 export const PlayerContext = createContext<PlayerContextProps>({
@@ -31,6 +32,7 @@ export const PlayerContext = createContext<PlayerContextProps>({
   currentTrack: null,
   play: () => null,
   pause: () => null,
+  seekTo: () => null,
 })
 
 export const PlayerProvider: React.FC = ({ children }) => {
@@ -59,6 +61,10 @@ export const PlayerProvider: React.FC = ({ children }) => {
         return
       }
 
+      if (currentTrack && track.id !== currentTrack.id) {
+        await TrackPlayer.reset()
+      }
+
       await TrackPlayer.add([track])
       setCurrentTrack(track)
       await TrackPlayer.play()
@@ -70,6 +76,12 @@ export const PlayerProvider: React.FC = ({ children }) => {
     await TrackPlayer.pause()
   }, [])
 
+  const seekTo = useCallback(async (amount = 30) => {
+    const position = await TrackPlayer.getPosition()
+
+    await TrackPlayer.seekTo(position + amount)
+  }, [])
+
   const value: PlayerContextProps = {
     isPlaying: playerState === STATE_PLAYING,
     isPaused: playerState === STATE_PAUSED,
@@ -78,6 +90,7 @@ export const PlayerProvider: React.FC = ({ children }) => {
     currentTrack,
     pause,
     play,
+    seekTo,
   }
 
   return (

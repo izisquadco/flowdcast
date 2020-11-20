@@ -40,7 +40,7 @@ const Player: React.FC = () => {
 
       <Content>
         <TextTicker
-          duration={3000}
+          duration={8000}
           repeatSpacer={50}
           marqueeDelay={1000}
           bounce
