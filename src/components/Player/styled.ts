@@ -2,9 +2,6 @@ import styled from 'styled-components/native'
 import { theme } from 'styled-tools'
 
 export const Container = styled.View`
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
   flex-direction: row;
   align-items: center;
   padding-horizontal: ${theme('spacing.default.px')};
