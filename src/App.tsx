@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import TrackPlayer from 'react-native-track-player'
 import { ThemeProvider } from 'styled-components'
-import { StatusBar } from 'react-native'
+import { StatusBar, ActivityIndicator } from 'react-native'
 
+import AppProvider from './contexts'
 import Routes from './routes'
 import theme from './theme'
 
@@ -37,29 +38,29 @@ const episode = {
 }
 
 const App: React.FC = () => {
+  const [isReady, setIsReady] = useState(false)
+
   useEffect(() => {
     async function setupPlayer() {
       await TrackPlayer.setupPlayer()
-      await TrackPlayer.add([episode])
-      await TrackPlayer.play()
 
-      setTimeout(() => {
-        TrackPlayer.stop()
-      }, 2000)
+      setIsReady(true)
     }
 
     setupPlayer()
   }, [])
 
   return (
-    <ThemeProvider theme={theme}>
-      <StatusBar
-        barStyle='light-content'
-        backgroundColor={theme.colors.background}
-      />
+    <AppProvider>
+      <ThemeProvider theme={theme}>
+        <StatusBar
+          barStyle='light-content'
+          backgroundColor={theme.colors.background}
+        />
 
-      <Routes />
-    </ThemeProvider>
+        {isReady ? <Routes /> : <ActivityIndicator />}
+      </ThemeProvider>
+    </AppProvider>
   )
 }
 
