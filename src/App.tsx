@@ -6,6 +6,7 @@ import TrackPlayer, {
   CAPABILITY_JUMP_FORWARD,
   CAPABILITY_JUMP_BACKWARD,
 } from 'react-native-track-player'
+import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import { ThemeProvider } from 'styled-components'
 import { StatusBar, ActivityIndicator } from 'react-native'
 
@@ -35,6 +36,10 @@ const App: React.FC = () => {
     }
 
     setupPlayer()
+  }, [])
+
+  useEffect(() => {
+    changeNavigationBarColor(theme.colors.background, false, true)
   }, [])
 
   return (

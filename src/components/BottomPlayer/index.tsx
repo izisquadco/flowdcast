@@ -15,7 +15,7 @@ import {
   ActionButton,
 } from './styled'
 
-const Player: React.FC = () => {
+const BottomPlayer: React.FC = () => {
   const theme = useContext(ThemeContext)
 
   const {
@@ -72,4 +72,4 @@ const Player: React.FC = () => {
   )
 }
 
-export default Player
+export default BottomPlayer

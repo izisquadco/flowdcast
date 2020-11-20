@@ -11,7 +11,7 @@ import {
 import Home from '../pages/Home'
 import Podcast from '../pages/Podcast'
 
-import Player from '../components/Player'
+import BottomPlayer from '../components/BottomPlayer'
 
 import theme from '../theme'
 
@@ -64,7 +64,7 @@ const Routes: React.FC = () => {
         />
       </Stack.Navigator>
 
-      <Player />
+      <BottomPlayer />
     </NavigationContainer>
   )
 }
