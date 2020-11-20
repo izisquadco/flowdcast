@@ -20,6 +20,7 @@
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.0",
+    "react-native-text-ticker": "^1.10.0",
     "react-native-vector-icons": "^7.1.0",
     "styled-components": "^5.2.1",
     "styled-tools": "^1.7.2"

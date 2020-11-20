@@ -6,6 +6,9 @@ export default {
     ripple: '#333',
     white: '#fff',
     black: '#000',
+    youtube: '#ff0000',
+    twitch: '#9146ff',
+    facebook: '#3b5998',
   },
 
   spacing: {

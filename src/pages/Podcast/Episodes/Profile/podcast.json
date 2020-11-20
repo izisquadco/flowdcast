@@ -4,6 +4,25 @@
     "avatar":
       "https://yt3.ggpht.com/a/AATXAJx4y3EbLBYR405vabr6Vu-uEmJT6c3bCvfmDhexFA=s512-c-k-c0x00ffffff-no-rj",
     "artist": "Flow",
-    "disabled": false
+    "disabled": false,
+    "feed": [
+      {
+        "id": "youtube.com/flowpodcast",
+        "url": "https://www.youtube.com/flowpodcast",
+        "icon": "youtube"
+      },
+
+      {
+        "id": "twitch.tv/flowpodcast",
+        "url": "https://www.twitch.tv/flowpodcast",
+        "icon": "twitch"
+      },
+
+      {
+        "id": "facebook.com/flowinlive",
+        "url": "https://www.facebook.com/flowinlive",
+        "icon": "facebook"
+      }
+    ]
   }
 ]
