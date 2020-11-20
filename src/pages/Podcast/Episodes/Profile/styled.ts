@@ -33,6 +33,7 @@ export const Feed = styled.View``
 
 export const FeedLabel = styled.Text`
   margin-bottom: ${theme('spacing.xs.px')};
+  font-size: 12px;
   font-weight: 700;
   color: ${theme('colors.placeholder')};
   text-transform: uppercase;

@@ -11,6 +11,8 @@ import {
 import Home from '../pages/Home'
 import Podcast from '../pages/Podcast'
 
+import Player from '../components/Player'
+
 import theme from '../theme'
 
 const Stack = createStackNavigator()
@@ -61,6 +63,8 @@ const Routes: React.FC = () => {
           options={options.pages.podcast}
         />
       </Stack.Navigator>
+
+      <Player />
     </NavigationContainer>
   )
 }
