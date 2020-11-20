@@ -7,7 +7,6 @@ import TrackPlayer, {
   CAPABILITY_JUMP_BACKWARD,
 } from 'react-native-track-player'
 import SplashScreen from 'react-native-splash-screen'
-import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import { ThemeProvider } from 'styled-components'
 import { StatusBar, ActivityIndicator } from 'react-native'
 
@@ -40,12 +39,10 @@ const App: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    SplashScreen.hide()
-  }, [])
-
-  useEffect(() => {
-    changeNavigationBarColor(theme.colors.background, false, true)
-  }, [])
+    if (isReady) {
+      SplashScreen.hide()
+    }
+  }, [isReady])
 
   return (
     <AppProvider>
