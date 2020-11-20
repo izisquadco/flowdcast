@@ -5,19 +5,22 @@ export const Container = styled.View`
   flex-direction: row;
   align-items: center;
   padding-horizontal: ${theme('spacing.default.px')};
-  background-color: #000;
+  background-color: ${theme('colors.background')};
+  border-top-width: 1px;
+  border-top-color: ${theme('colors.foreground')};
 `
 
 export const Artwork = styled.Image`
-  width: 40px;
-  height: 40px;
-  border-radius: ${theme('radius.default.px')};
+  width: 50px;
+  height: 50px;
+  aspect-ratio: 1;
 `
 
 export const Content = styled.View`
-  height: 72px;
   flex: 1;
-  padding: ${theme('spacing.default.px')};
+  justify-content: center;
+  height: 72px;
+  padding-horizontal: ${theme('spacing.default.px')};
 `
 
 export const Title = styled.Text`
@@ -27,8 +30,6 @@ export const Title = styled.Text`
 `
 
 export const Artist = styled.Text`
-  margin-bottom: ${theme('spacing.sm.px')};
-  font-size: 16px;
   font-weight: 700;
   color: ${theme('colors.placeholder')};
 `

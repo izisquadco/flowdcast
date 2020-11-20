@@ -6222,11 +6222,6 @@ react-native-swift@^1.2.3:
     "@raydeck/xcode" "^2.2.0"
     glob "^7.1.2"
 
-react-native-text-ticker@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-text-ticker/-/react-native-text-ticker-1.10.0.tgz#7d927a86c6edbc8c89882e9d9b9d87d1ecab4acf"
-  integrity sha512-ZyMIuw+3IRSO1fyE4naCpvLklF/uUqd5FKNzjb/6EaeAnVUfDjGq6PGZDrmj0R2LcpisAFObzS7x3HwtPft/cA==
-
 react-native-track-player@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-1.2.3.tgz#cd147b1fc93a229c49392abd7b37f087285e673a"

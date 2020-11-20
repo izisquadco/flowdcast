@@ -31,23 +31,10 @@ const BottomPlayer: React.FC = () => {
 
   return (
     <Container>
-      <Artwork
-        source={{
-          uri:
-            'https://firebasestorage.googleapis.com/v0/b/flowpodcast.appspot.com/o/uploads%2F2d74e69c-6817-427f-83d9-c33e2fb18eb8?alt=media&token=84201aec-e56f-4d87-8fc6-d070da49bf48',
-        }}
-      />
+      <Artwork source={{ uri: currentTrack.artwork }} />
 
       <Content>
-        <TextTicker
-          duration={8000}
-          repeatSpacer={50}
-          marqueeDelay={1000}
-          bounce
-          loop
-        >
-          <Title>{currentTrack.title}</Title>
-        </TextTicker>
+        <Title numberOfLines={1}>{currentTrack.title}</Title>
         <Artist>{currentTrack.artist}</Artist>
       </Content>
 

@@ -30,15 +30,7 @@ const Episodes: React.FC = () => {
 
   const renderItem = useCallback(
     ({
-      item: {
-        id,
-        mp3: url,
-        title,
-        artist,
-        cover: artwork,
-        avatar,
-        description,
-      },
+      item: { id, mp3: url, title, artist, artwork, avatar, description },
     }) => (
       <Episode
         onPress={() =>
