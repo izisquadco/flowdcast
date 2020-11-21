@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
 
@@ -8,9 +8,12 @@ import {
   Container,
   Header,
   Artwork,
+  Wrapper,
+  Content,
+  Details,
   Title,
   Artist,
-  Wrapper,
+  PlayerContainer,
   ProgressContainer,
   Progress,
   Start,
@@ -25,13 +28,22 @@ const Player: React.FC = () => {
   const {
     isPlaying,
     isPaused,
+    isBuffering,
     currentTrack,
     progress: { position, duration, positionString, durationString },
+    showPlayer,
+    hidePlayer,
     play,
     pause,
     seekTo,
     jumpTo,
   } = usePlayer()
+
+  useEffect(() => {
+    showPlayer()
+
+    return () => hidePlayer()
+  }, [showPlayer, hidePlayer])
 
   if (!currentTrack) {
     return null
@@ -39,64 +51,71 @@ const Player: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <Artwork source={{ uri: currentTrack.artwork }} />
-        <Title>{currentTrack.title}</Title>
-        <Artist>{currentTrack.artist}</Artist>
-      </Header>
-
       <Wrapper>
-        <ProgressContainer>
-          <Start>{positionString}</Start>
-          <Progress
-            value={position}
-            minimumValue={0}
-            maximumValue={duration}
-            minimumTrackTintColor={theme.colors.white}
-            maximumTrackTintColor={theme.colors.placeholder}
-            thumbTintColor={theme.colors.white}
-            onValueChange={value => jumpTo(value)}
-          />
-          <End>{durationString}</End>
-        </ProgressContainer>
+        <Header>
+          <Artwork source={{ uri: currentTrack.artwork }} />
+        </Header>
 
-        <ActionButtons>
-          <ActionButton onPress={() => seekTo(-30)}>
-            <MaterialIcons
-              name='replay-30'
-              size={32}
-              color={theme.colors.white}
-            />
-          </ActionButton>
+        <Content>
+          <Details>
+            <Title numberOfLines={1}>{currentTrack.title}</Title>
+            <Artist>{currentTrack.artist}</Artist>
+          </Details>
 
-          {isPaused && (
-            <ActionButton onPress={() => play()}>
-              <MaterialIcons
-                name='play-arrow'
-                size={64}
-                color={theme.colors.white}
+          <PlayerContainer>
+            <ProgressContainer>
+              <Start>{positionString}</Start>
+              <Progress
+                value={position}
+                minimumValue={0}
+                maximumValue={duration}
+                minimumTrackTintColor={theme.colors.white}
+                maximumTrackTintColor={theme.colors.placeholder}
+                thumbTintColor={theme.colors.white}
+                onValueChange={value => jumpTo(value)}
               />
-            </ActionButton>
-          )}
+              <End>{durationString}</End>
+            </ProgressContainer>
 
-          {isPlaying && (
-            <ActionButton onPress={() => pause()}>
-              <MaterialIcons
-                name='pause'
-                size={64}
-                color={theme.colors.white}
-              />
-            </ActionButton>
-          )}
+            <ActionButtons>
+              <ActionButton onPress={() => seekTo(-30)}>
+                <MaterialIcons
+                  name='replay-30'
+                  size={32}
+                  color={theme.colors.white}
+                />
+              </ActionButton>
 
-          <ActionButton onPress={() => seekTo(30)}>
-            <MaterialIcons
-              name='forward-30'
-              size={32}
-              color={theme.colors.white}
-            />
-          </ActionButton>
-        </ActionButtons>
+              {(isPaused || isBuffering) && (
+                <ActionButton onPress={() => play()}>
+                  <MaterialIcons
+                    name='play-arrow'
+                    size={64}
+                    color={theme.colors.white}
+                  />
+                </ActionButton>
+              )}
+
+              {(isPlaying || isBuffering) && (
+                <ActionButton onPress={() => pause()}>
+                  <MaterialIcons
+                    name='pause'
+                    size={64}
+                    color={theme.colors.white}
+                  />
+                </ActionButton>
+              )}
+
+              <ActionButton onPress={() => seekTo(30)}>
+                <MaterialIcons
+                  name='forward-30'
+                  size={32}
+                  color={theme.colors.white}
+                />
+              </ActionButton>
+            </ActionButtons>
+          </PlayerContainer>
+        </Content>
       </Wrapper>
     </Container>
   )

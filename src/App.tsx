@@ -13,7 +13,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     async function setupPlayer() {
-      await TrackPlayer.setupPlayer()
+      await TrackPlayer.setupPlayer({
+        waitForBuffer: true,
+      })
 
       await TrackPlayer.updateOptions({
         capabilities: [

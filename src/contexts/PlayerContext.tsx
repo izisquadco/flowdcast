@@ -13,9 +13,11 @@ interface ExtendedTrack extends Track {
 }
 
 interface PlayerContextProps {
+  isPlayerVisible: boolean
   isPlaying: boolean
   isPaused: boolean
   isStopped: boolean
+  isBuffering: boolean
   isEmpty: boolean
   currentTrack: ExtendedTrack | null
   progress: {
@@ -24,6 +26,8 @@ interface PlayerContextProps {
     positionString: string
     durationString: string
   }
+  showPlayer: () => void
+  hidePlayer: () => void
   play: (track?: ExtendedTrack) => void
   pause: () => void
   seekTo: (amount?: number) => void
@@ -31,9 +35,11 @@ interface PlayerContextProps {
 }
 
 export const PlayerContext = createContext<PlayerContextProps>({
+  isPlayerVisible: false,
   isPlaying: false,
   isPaused: false,
   isStopped: false,
+  isBuffering: false,
   isEmpty: true,
   currentTrack: null,
   progress: {
@@ -42,6 +48,8 @@ export const PlayerContext = createContext<PlayerContextProps>({
     positionString: '00:00:00',
     durationString: '00:00:00',
   },
+  showPlayer: () => null,
+  hidePlayer: () => null,
   play: () => null,
   pause: () => null,
   seekTo: () => null,
@@ -51,6 +59,7 @@ export const PlayerContext = createContext<PlayerContextProps>({
 export const PlayerProvider: React.FC = ({ children }) => {
   const [playerState, setPlayerState] = useState<State | null>(null)
   const [currentTrack, setCurrentTrack] = useState<ExtendedTrack | null>(null)
+  const [isPlayerVisible, setIsPlayerVisible] = useState(false)
 
   const [progress, setProgress] = useState({
     position: 0,
@@ -99,6 +108,14 @@ export const PlayerProvider: React.FC = ({ children }) => {
     }
   }, [])
 
+  const showPlayer = useCallback(() => {
+    setIsPlayerVisible(true)
+  }, [])
+
+  const hidePlayer = useCallback(() => {
+    setIsPlayerVisible(false)
+  }, [])
+
   const play = useCallback(
     async (track?: ExtendedTrack) => {
       if (!track) {
@@ -134,12 +151,16 @@ export const PlayerProvider: React.FC = ({ children }) => {
   }, [])
 
   const value: PlayerContextProps = {
+    isPlayerVisible,
     isPlaying: playerState === State.Playing,
     isPaused: playerState === State.Paused,
     isStopped: playerState === State.Stopped,
+    isBuffering: playerState === State.Buffering,
     isEmpty: playerState === null,
     currentTrack,
     progress,
+    showPlayer,
+    hidePlayer,
     pause,
     play,
     seekTo,

@@ -1,9 +1,9 @@
 import React, { useContext, useCallback } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
-import { useNavigation } from '@react-navigation/native'
 
 import { usePlayer } from '../../contexts/PlayerContext'
+import { navigate } from '../../routes/RootNavigation'
 
 import {
   Container,
@@ -17,9 +17,9 @@ import {
 
 const BottomPlayer: React.FC = () => {
   const theme = useContext(ThemeContext)
-  const navigation = useNavigation()
 
   const {
+    isPlayerVisible,
     isPlaying,
     isPaused,
     isEmpty,
@@ -29,10 +29,10 @@ const BottomPlayer: React.FC = () => {
   } = usePlayer()
 
   const handleNavigate = useCallback(() => {
-    navigation.navigate('Player')
-  }, [navigation])
+    navigate('Player')
+  }, [])
 
-  if (isEmpty || !currentTrack) return null
+  if (isPlayerVisible || isEmpty || !currentTrack) return null
 
   return (
     <Container onPress={handleNavigate} activeOpacity={0.98}>

@@ -8,6 +8,10 @@ import {
   CardStyleInterpolators,
 } from '@react-navigation/stack'
 
+import { navigationRef, isReadyRef } from './RootNavigation'
+
+import BottomPlayer from '../components/BottomPlayer'
+
 import Home from '../pages/Home'
 import Podcast from '../pages/Podcast'
 import Player from '../pages/Player'
@@ -52,8 +56,19 @@ const options = {
 }
 
 const Routes: React.FC = () => {
+  React.useEffect(() => {
+    return () => {
+      isReadyRef.current = false
+    }
+  }, [])
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() => {
+        isReadyRef.current = true
+      }}
+    >
       <Stack.Navigator screenOptions={options.screenOptions} mode='modal'>
         <Stack.Screen
           name='Home'
@@ -73,6 +88,8 @@ const Routes: React.FC = () => {
           options={options.pages.player}
         />
       </Stack.Navigator>
+
+      <BottomPlayer />
     </NavigationContainer>
   )
 }

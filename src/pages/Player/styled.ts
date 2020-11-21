@@ -5,6 +5,7 @@ import { theme } from 'styled-tools'
 export const Container = styled.View`
   flex: 1;
   padding-horizontal: ${theme('spacing.default.px')};
+  padding-bottom: ${theme('spacing.default.px')};
   background-color: ${theme('colors.background')};
 `
 
@@ -13,9 +14,22 @@ export const Header = styled.View`
 `
 
 export const Artwork = styled.Image`
-  width: 80%;
+  width: 100%;
   aspect-ratio: 1;
-  margin-bottom: ${theme('spacing.lg.px')};
+  margin-bottom: ${theme('spacing.md.px')};
+`
+
+export const Wrapper = styled.View`
+  flex: 1;
+`
+
+export const Content = styled.View`
+  flex: 1;
+  justify-content: space-between;
+`
+
+export const Details = styled.View`
+  align-items: center;
 `
 
 export const Title = styled.Text`
@@ -31,9 +45,7 @@ export const Artist = styled.Text`
   color: ${theme('colors.placeholder')};
 `
 
-export const Wrapper = styled.View`
-  padding-top: ${theme('spacing.lg.px')};
-`
+export const PlayerContainer = styled.View``
 
 export const ProgressContainer = styled.View`
   flex-direction: row;

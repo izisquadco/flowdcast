@@ -10,7 +10,6 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Trending />
-      <BottomPlayer />
     </Container>
   )
 }
