@@ -10,8 +10,7 @@ import {
 
 import Home from '../pages/Home'
 import Podcast from '../pages/Podcast'
-
-import BottomPlayer from '../components/BottomPlayer'
+import Player from '../pages/Player'
 
 import theme from '../theme'
 
@@ -44,13 +43,18 @@ const options = {
     podcast: {
       title: '',
     },
+
+    player: {
+      title: '',
+      cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+    },
   },
 }
 
 const Routes: React.FC = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={options.screenOptions}>
+      <Stack.Navigator screenOptions={options.screenOptions} mode='modal'>
         <Stack.Screen
           name='Home'
           component={Home}
@@ -62,9 +66,13 @@ const Routes: React.FC = () => {
           component={Podcast}
           options={options.pages.podcast}
         />
-      </Stack.Navigator>
 
-      <BottomPlayer />
+        <Stack.Screen
+          name='Player'
+          component={Player}
+          options={options.pages.player}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }

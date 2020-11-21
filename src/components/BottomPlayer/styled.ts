@@ -1,7 +1,10 @@
 import styled from 'styled-components/native'
 import { theme } from 'styled-tools'
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 0;
+  z-index: 10;
   flex-direction: row;
   align-items: center;
   padding-horizontal: ${theme('spacing.default.px')};

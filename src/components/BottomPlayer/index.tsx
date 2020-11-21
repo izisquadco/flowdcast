@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useCallback } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import TextTicker from 'react-native-text-ticker'
 import { ThemeContext } from 'styled-components'
+import { useNavigation } from '@react-navigation/native'
 
 import { usePlayer } from '../../contexts/PlayerContext'
 
@@ -17,6 +17,7 @@ import {
 
 const BottomPlayer: React.FC = () => {
   const theme = useContext(ThemeContext)
+  const navigation = useNavigation()
 
   const {
     isPlaying,
@@ -27,10 +28,14 @@ const BottomPlayer: React.FC = () => {
     pause,
   } = usePlayer()
 
+  const handleNavigate = useCallback(() => {
+    navigation.navigate('Player')
+  }, [navigation])
+
   if (isEmpty || !currentTrack) return null
 
   return (
-    <Container>
+    <Container onPress={handleNavigate}>
       <Artwork source={{ uri: currentTrack.artwork }} />
 
       <Content>

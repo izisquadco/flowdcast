@@ -5,21 +5,19 @@ import React, {
   useCallback,
   useContext,
 } from 'react'
-import TrackPlayer, {
-  Track,
-  State,
-  STATE_PAUSED,
-  STATE_PLAYING,
-  STATE_STOPPED,
-} from 'react-native-track-player'
+import TrackPlayer, { Track, State, Event } from 'react-native-track-player'
+
+interface ExtendedTrack extends Track {
+  artwork?: string
+}
 
 interface PlayerContextProps {
   isPlaying: boolean
   isPaused: boolean
   isStopped: boolean
   isEmpty: boolean
-  currentTrack: Track | null
-  play: (track?: Track) => void
+  currentTrack: ExtendedTrack | null
+  play: (track?: ExtendedTrack) => void
   pause: () => void
   seekTo: (amount?: number) => void
 }
@@ -36,24 +34,23 @@ export const PlayerContext = createContext<PlayerContextProps>({
 })
 
 export const PlayerProvider: React.FC = ({ children }) => {
-  const [playerState, setPlayerState] = useState<null | State>(null)
-  const [currentTrack, setCurrentTrack] = useState<null | Track>(null)
+  const [playerState, setPlayerState] = useState<State | null>(null)
+  const [currentTrack, setCurrentTrack] = useState<ExtendedTrack | null>(null)
 
   useEffect(() => {
     const listener = TrackPlayer.addEventListener(
-      'playback-state',
+      Event.PlaybackState,
       ({ state }: { state: State }) => {
         setPlayerState(state)
       },
     )
-
     return () => {
       listener.remove()
     }
   }, [])
 
   const play = useCallback(
-    async (track?: Track) => {
+    async (track?: ExtendedTrack) => {
       if (!track) {
         if (currentTrack) {
           await TrackPlayer.play()
@@ -83,9 +80,9 @@ export const PlayerProvider: React.FC = ({ children }) => {
   }, [])
 
   const value: PlayerContextProps = {
-    isPlaying: playerState === STATE_PLAYING,
-    isPaused: playerState === STATE_PAUSED,
-    isStopped: playerState === STATE_STOPPED,
+    isPlaying: playerState === State.Playing,
+    isPaused: playerState === State.Paused,
+    isStopped: playerState === State.Stopped,
     isEmpty: playerState === null,
     currentTrack,
     pause,
