@@ -15,7 +15,7 @@ export const Podcast = styled.TouchableOpacity<PodcastProps>`
   ${ifProp(
     'disabled',
     css`
-      opacity: 0.2;
+      opacity: 0.1;
     `,
   )}
 `
