@@ -35,7 +35,7 @@ const BottomPlayer: React.FC = () => {
   if (isEmpty || !currentTrack) return null
 
   return (
-    <Container onPress={handleNavigate}>
+    <Container onPress={handleNavigate} activeOpacity={0.98}>
       <Artwork source={{ uri: currentTrack.artwork }} />
 
       <Content>

@@ -1,11 +1,8 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
-import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks'
 
 import { usePlayer } from '../../contexts/PlayerContext'
-
-import { humanize } from '../../utils'
 
 import {
   Container,
@@ -25,12 +22,16 @@ import {
 const Player: React.FC = () => {
   const theme = useContext(ThemeContext)
 
-  const { duration, position } = useTrackPlayerProgress()
-
-  const currentPosition = useMemo(() => position, [position])
-  const totalPosition = useMemo(() => position - duration, [duration, position])
-
-  const { isPlaying, isPaused, currentTrack, play, pause, seekTo } = usePlayer()
+  const {
+    isPlaying,
+    isPaused,
+    currentTrack,
+    progress: { position, duration, positionString, durationString },
+    play,
+    pause,
+    seekTo,
+    jumpTo,
+  } = usePlayer()
 
   if (!currentTrack) {
     return null
@@ -46,16 +47,18 @@ const Player: React.FC = () => {
 
       <Wrapper>
         <ProgressContainer>
+          <Start>{positionString}</Start>
           <Progress
             value={position}
             minimumValue={0}
             maximumValue={duration}
             minimumTrackTintColor={theme.colors.white}
             maximumTrackTintColor={theme.colors.placeholder}
+            thumbTintColor={theme.colors.white}
+            onValueChange={value => jumpTo(value)}
           />
+          <End>{durationString}</End>
         </ProgressContainer>
-        <Start>{humanize(currentPosition)}</Start>
-        <End>{humanize(totalPosition)}</End>
 
         <ActionButtons>
           <ActionButton onPress={() => seekTo(-30)}>

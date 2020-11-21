@@ -1,14 +1,10 @@
 import styled from 'styled-components/native'
 import Slider from '@react-native-community/slider'
 import { theme } from 'styled-tools'
-import { Dimensions } from 'react-native'
-
-const { width } = Dimensions.get('window')
-
-const boundWidth = width - 32
 
 export const Container = styled.View`
   flex: 1;
+  padding-horizontal: ${theme('spacing.default.px')};
   background-color: ${theme('colors.background')};
 `
 
@@ -17,7 +13,7 @@ export const Header = styled.View`
 `
 
 export const Artwork = styled.Image`
-  width: ${boundWidth}px;
+  width: 80%;
   aspect-ratio: 1;
   margin-bottom: ${theme('spacing.lg.px')};
 `
@@ -39,16 +35,27 @@ export const Wrapper = styled.View`
   padding-top: ${theme('spacing.lg.px')};
 `
 
-export const ProgressContainer = styled.View``
-
-export const Progress = styled(Slider)`
-  width: 100%;
-  /* height: 40px; */
+export const ProgressContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
 `
 
-export const Start = styled.Text``
+export const Progress = styled(Slider)`
+  flex: 1;
+  height: 40px;
+`
 
-export const End = styled.Text``
+export const Start = styled.Text`
+  margin-right: ${theme('spacing.sm.px')};
+  font-weight: 700;
+  color: ${theme('colors.placeholder')};
+`
+
+export const End = styled.Text`
+  margin-left: ${theme('spacing.sm.px')};
+  font-weight: 700;
+  color: ${theme('colors.placeholder')};
+`
 
 export const ActionButtons = styled.View`
   flex-direction: row;
