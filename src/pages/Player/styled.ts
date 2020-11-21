@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import Slider from '@react-native-community/slider'
 import { theme } from 'styled-tools'
 import { Dimensions } from 'react-native'
 
@@ -37,6 +38,17 @@ export const Artist = styled.Text`
 export const Wrapper = styled.View`
   padding-top: ${theme('spacing.lg.px')};
 `
+
+export const ProgressContainer = styled.View``
+
+export const Progress = styled(Slider)`
+  width: 100%;
+  /* height: 40px; */
+`
+
+export const Start = styled.Text``
+
+export const End = styled.Text``
 
 export const ActionButtons = styled.View`
   flex-direction: row;

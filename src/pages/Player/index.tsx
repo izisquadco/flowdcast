@@ -1,8 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
+import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks'
 
 import { usePlayer } from '../../contexts/PlayerContext'
+
+import { humanize } from '../../utils'
 
 import {
   Container,
@@ -11,12 +14,21 @@ import {
   Title,
   Artist,
   Wrapper,
+  ProgressContainer,
+  Progress,
+  Start,
+  End,
   ActionButtons,
   ActionButton,
 } from './styled'
 
 const Player: React.FC = () => {
   const theme = useContext(ThemeContext)
+
+  const { duration, position } = useTrackPlayerProgress()
+
+  const currentPosition = useMemo(() => position, [position])
+  const totalPosition = useMemo(() => position - duration, [duration, position])
 
   const { isPlaying, isPaused, currentTrack, play, pause, seekTo } = usePlayer()
 
@@ -33,6 +45,18 @@ const Player: React.FC = () => {
       </Header>
 
       <Wrapper>
+        <ProgressContainer>
+          <Progress
+            value={position}
+            minimumValue={0}
+            maximumValue={duration}
+            minimumTrackTintColor={theme.colors.white}
+            maximumTrackTintColor={theme.colors.placeholder}
+          />
+        </ProgressContainer>
+        <Start>{humanize(currentPosition)}</Start>
+        <End>{humanize(totalPosition)}</End>
+
         <ActionButtons>
           <ActionButton onPress={() => seekTo(-30)}>
             <MaterialIcons
