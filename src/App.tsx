@@ -14,29 +14,27 @@ const App: React.FC = () => {
 
   useEffect(() => {
     async function setupPlayer() {
-      await TrackPlayer.setupPlayer({
-        waitForBuffer: true,
-      })
+      TrackPlayer.setupPlayer().then(async () => {
+        await TrackPlayer.updateOptions({
+          capabilities: [
+            Capability.Play,
+            Capability.Pause,
+            Capability.Stop,
+            Capability.JumpForward,
+            Capability.JumpBackward,
+          ],
+          compactCapabilities: [
+            Capability.Play,
+            Capability.Pause,
+            Capability.Stop,
+            Capability.JumpForward,
+            Capability.JumpBackward,
+          ],
+          jumpInterval: 30,
+        })
 
-      await TrackPlayer.updateOptions({
-        capabilities: [
-          Capability.Play,
-          Capability.Pause,
-          Capability.Stop,
-          Capability.JumpForward,
-          Capability.JumpBackward,
-        ],
-        compactCapabilities: [
-          Capability.Play,
-          Capability.Pause,
-          Capability.Stop,
-          Capability.JumpForward,
-          Capability.JumpBackward,
-        ],
-        jumpInterval: 30,
+        setIsReady(true)
       })
-
-      setIsReady(true)
     }
 
     setupPlayer()
@@ -56,7 +54,15 @@ const App: React.FC = () => {
           backgroundColor={theme.colors.background}
         />
 
-        {isReady ? <Routes /> : <ActivityIndicator />}
+        {isReady ? (
+          <Routes />
+        ) : (
+          <ActivityIndicator
+            size='large'
+            color={theme.colors.placeholder}
+            style={{ flex: 1 }}
+          />
+        )}
       </ThemeProvider>
     </AppProvider>
   )

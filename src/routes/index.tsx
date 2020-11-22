@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { NavigationContainer } from '@react-navigation/native'
 import {
@@ -56,7 +56,7 @@ const options = {
 }
 
 const Routes: React.FC = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       isReadyRef.current = false
     }
