@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
         </Content>
       </Podcast>
     ),
-    [theme.colors],
+    [handleLinking, theme.colors],
   )
 
   return (

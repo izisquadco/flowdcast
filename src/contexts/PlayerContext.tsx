@@ -5,7 +5,14 @@ import React, {
   useCallback,
   useContext,
 } from 'react'
-import TrackPlayer, { Track, State, Event } from 'react-native-track-player'
+import TrackPlayer, {
+  Track,
+  State,
+  STATE_PLAYING,
+  STATE_PAUSED,
+  STATE_BUFFERING,
+  STATE_STOPPED,
+} from 'react-native-track-player'
 import { format, setSeconds, startOfDay } from 'date-fns'
 
 interface ExtendedTrack extends Track {
@@ -104,7 +111,7 @@ export const PlayerProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const listener = TrackPlayer.addEventListener(
-      Event.PlaybackState,
+      'playback-state',
       ({ state }: { state: State }) => {
         setPlayerState(state)
       },
@@ -163,10 +170,10 @@ export const PlayerProvider: React.FC = ({ children }) => {
   const value: PlayerContextProps = {
     previousAction,
     isPlayerVisible,
-    isPlaying: playerState === State.Playing,
-    isPaused: playerState === State.Paused,
-    isStopped: playerState === State.Stopped,
-    isBuffering: playerState === State.Buffering,
+    isPlaying: playerState === STATE_PLAYING,
+    isPaused: playerState === STATE_PAUSED,
+    isStopped: playerState === STATE_STOPPED,
+    isBuffering: playerState === STATE_BUFFERING,
     isEmpty: playerState === null,
     currentTrack,
     progress,
