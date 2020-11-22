@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import CodePush from 'react-native-code-push'
 import TrackPlayer, { Capability } from 'react-native-track-player'
 import SplashScreen from 'react-native-splash-screen'
 import { ThemeProvider } from 'styled-components'
@@ -61,4 +62,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default CodePush(App)
