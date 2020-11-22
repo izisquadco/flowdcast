@@ -13,6 +13,7 @@ interface ExtendedTrack extends Track {
 }
 
 interface PlayerContextProps {
+  previousAction: 'play' | 'pause' | null
   isPlayerVisible: boolean
   isPlaying: boolean
   isPaused: boolean
@@ -35,6 +36,7 @@ interface PlayerContextProps {
 }
 
 export const PlayerContext = createContext<PlayerContextProps>({
+  previousAction: null,
   isPlayerVisible: false,
   isPlaying: false,
   isPaused: false,
@@ -59,6 +61,10 @@ export const PlayerContext = createContext<PlayerContextProps>({
 export const PlayerProvider: React.FC = ({ children }) => {
   const [playerState, setPlayerState] = useState<State | null>(null)
   const [currentTrack, setCurrentTrack] = useState<ExtendedTrack | null>(null)
+
+  const [previousAction, setPreviousAction] = useState<'play' | 'pause' | null>(
+    null,
+  )
   const [isPlayerVisible, setIsPlayerVisible] = useState(false)
 
   const [progress, setProgress] = useState({
@@ -118,6 +124,8 @@ export const PlayerProvider: React.FC = ({ children }) => {
 
   const play = useCallback(
     async (track?: ExtendedTrack) => {
+      setPreviousAction('play')
+
       if (!track) {
         if (currentTrack) {
           await TrackPlayer.play()
@@ -137,6 +145,8 @@ export const PlayerProvider: React.FC = ({ children }) => {
   )
 
   const pause = useCallback(async () => {
+    setPreviousAction('pause')
+
     await TrackPlayer.pause()
   }, [])
 
@@ -151,6 +161,7 @@ export const PlayerProvider: React.FC = ({ children }) => {
   }, [])
 
   const value: PlayerContextProps = {
+    previousAction,
     isPlayerVisible,
     isPlaying: playerState === State.Playing,
     isPaused: playerState === State.Paused,

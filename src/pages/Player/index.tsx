@@ -26,9 +26,9 @@ const Player: React.FC = () => {
   const theme = useContext(ThemeContext)
 
   const {
+    previousAction,
     isPlaying,
     isPaused,
-    isBuffering,
     currentTrack,
     progress: { position, duration, positionString, durationString },
     showPlayer,
@@ -86,7 +86,7 @@ const Player: React.FC = () => {
                 />
               </ActionButton>
 
-              {(isPaused || isBuffering) && (
+              {isPaused && (
                 <ActionButton onPress={() => play()}>
                   <MaterialIcons
                     name='play-arrow'
@@ -96,7 +96,27 @@ const Player: React.FC = () => {
                 </ActionButton>
               )}
 
-              {(isPlaying || isBuffering) && (
+              {isPlaying && (
+                <ActionButton onPress={() => pause()}>
+                  <MaterialIcons
+                    name='pause'
+                    size={64}
+                    color={theme.colors.white}
+                  />
+                </ActionButton>
+              )}
+
+              {!isPaused && !isPlaying && previousAction === 'pause' && (
+                <ActionButton onPress={() => play()}>
+                  <MaterialIcons
+                    name='play-arrow'
+                    size={64}
+                    color={theme.colors.white}
+                  />
+                </ActionButton>
+              )}
+
+              {!isPaused && !isPlaying && previousAction === 'play' && (
                 <ActionButton onPress={() => pause()}>
                   <MaterialIcons
                     name='pause'
