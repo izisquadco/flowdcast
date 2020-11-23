@@ -2,8 +2,6 @@ import React, { useContext, useEffect } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
 
-import Ad from '../../components/Ad'
-
 import { usePlayer } from '../../contexts/PlayerContext'
 
 import {
@@ -139,8 +137,6 @@ const Player: React.FC = () => {
           </PlayerContainer>
         </Content>
       </Wrapper>
-
-      <Ad id='ca-app-pub-5021327379088901/1704856966' />
     </Container>
   )
 }

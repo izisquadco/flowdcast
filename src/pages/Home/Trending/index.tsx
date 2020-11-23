@@ -1,6 +1,7 @@
 import React, { useContext, useCallback } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
+import { AdMobBanner } from 'react-native-admob'
 
 import { usePlayer } from '../../../contexts/PlayerContext'
 
@@ -11,6 +12,7 @@ import trending from './trending.json'
 import {
   Container,
   Wrapper,
+  TrendingList,
   Episode,
   Content,
   Title,
@@ -21,7 +23,7 @@ import {
   PlayButtonText,
 } from './styled'
 
-const Episodes: React.FC = () => {
+const Trending: React.FC = () => {
   const theme = useContext(ThemeContext)
 
   const { play } = usePlayer()
@@ -79,15 +81,24 @@ const Episodes: React.FC = () => {
 
   return (
     <Container>
-      <Wrapper
-        data={trending}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-        ListHeaderComponent={renderHeader}
-        showsVerticalScrollIndicator={false}
+      <Wrapper>
+        <TrendingList
+          data={trending}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          ListHeaderComponent={renderHeader}
+          showsVerticalScrollIndicator={false}
+        />
+      </Wrapper>
+
+      <AdMobBanner
+        adSize='fullBanner'
+        adUnitID='ca-app-pub-3940256099942544/6300978111'
+        testDevices={[AdMobBanner.simulatorId]}
+        onAdFailedToLoad={(error: Error) => console.error(error)}
       />
     </Container>
   )
 }
 
-export default Episodes
+export default Trending

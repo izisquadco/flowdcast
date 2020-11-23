@@ -2,9 +2,15 @@ import styled from 'styled-components/native'
 import { theme } from 'styled-tools'
 import { RectButton } from 'react-native-gesture-handler'
 
-export const Container = styled.View``
+export const Container = styled.View`
+  flex: 1;
+`
 
-export const Wrapper = styled.FlatList``
+export const Wrapper = styled.View`
+  flex: 1;
+`
+
+export const TrendingList = styled.FlatList``
 
 export const Episode = styled(RectButton)`
   padding: ${theme('spacing.default.px')};
