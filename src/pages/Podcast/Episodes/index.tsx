@@ -93,7 +93,7 @@ const Episodes: React.FC = () => {
 
       <AdMobBanner
         adSize='fullBanner'
-        adUnitID='ca-app-pub-3940256099942544/6300978111'
+        adUnitID='ca-app-pub-5021327379088901/7798480266'
         testDevices={[AdMobBanner.simulatorId]}
         onAdFailedToLoad={(error: Error) => console.error(error)}
       />
