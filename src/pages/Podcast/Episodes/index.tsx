@@ -1,6 +1,7 @@
 import React, { useContext, useCallback } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
+import { AdMobBanner } from 'react-native-admob'
 
 import { usePlayer } from '../../../contexts/PlayerContext'
 
@@ -11,6 +12,7 @@ import episodes from './episodes.json'
 import {
   Container,
   Wrapper,
+  EpisodesList,
   Episode,
   Content,
   Title,
@@ -79,12 +81,21 @@ const Episodes: React.FC = () => {
 
   return (
     <Container>
-      <Wrapper
-        data={episodes}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-        ListHeaderComponent={renderHeader}
-        showsVerticalScrollIndicator={false}
+      <Wrapper>
+        <EpisodesList
+          data={episodes}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          ListHeaderComponent={renderHeader}
+          showsVerticalScrollIndicator={false}
+        />
+      </Wrapper>
+
+      <AdMobBanner
+        adSize='fullBanner'
+        adUnitID='ca-app-pub-3940256099942544/6300978111'
+        testDevices={[AdMobBanner.simulatorId]}
+        onAdFailedToLoad={(error: Error) => console.error(error)}
       />
     </Container>
   )
