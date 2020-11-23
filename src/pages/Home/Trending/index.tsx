@@ -5,6 +5,8 @@ import { AdMobBanner } from 'react-native-admob'
 
 import { usePlayer } from '../../../contexts/PlayerContext'
 
+import BottomPlayer from '../../../components/BottomPlayer'
+
 import Podcasts from './Podcasts'
 
 import trending from './trending.json'
@@ -90,6 +92,8 @@ const Trending: React.FC = () => {
           showsVerticalScrollIndicator={false}
         />
       </Wrapper>
+
+      <BottomPlayer />
 
       <AdMobBanner
         adSize='fullBanner'

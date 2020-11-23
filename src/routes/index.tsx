@@ -10,8 +10,6 @@ import {
 
 import { navigationRef, isReadyRef } from './RootNavigation'
 
-import BottomPlayer from '../components/BottomPlayer'
-
 import Home from '../pages/Home'
 import Podcast from '../pages/Podcast'
 import Player from '../pages/Player'
@@ -88,8 +86,6 @@ const Routes: React.FC = () => {
           options={options.pages.player}
         />
       </Stack.Navigator>
-
-      <BottomPlayer />
     </NavigationContainer>
   )
 }
