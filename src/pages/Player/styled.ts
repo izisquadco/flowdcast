@@ -4,9 +4,6 @@ import { theme } from 'styled-tools'
 
 export const Container = styled.View`
   flex: 1;
-  padding-horizontal: ${theme('spacing.default.px')};
-  padding-bottom: ${theme('spacing.default.px')};
-  background-color: ${theme('colors.background')};
 `
 
 export const Header = styled.View`
@@ -21,6 +18,9 @@ export const Artwork = styled.Image`
 
 export const Wrapper = styled.View`
   flex: 1;
+  padding-horizontal: ${theme('spacing.default.px')};
+  padding-bottom: ${theme('spacing.default.px')};
+  background-color: ${theme('colors.background')};
 `
 
 export const Content = styled.View`

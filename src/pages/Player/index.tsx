@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { ThemeContext } from 'styled-components'
+import { AdMobBanner } from 'react-native-admob'
 
 import { usePlayer } from '../../contexts/PlayerContext'
 
@@ -137,6 +138,13 @@ const Player: React.FC = () => {
           </PlayerContainer>
         </Content>
       </Wrapper>
+
+      <AdMobBanner
+        adSize='fullBanner'
+        adUnitID='ca-app-pub-3940256099942544/6300978111'
+        testDevices={[AdMobBanner.simulatorId]}
+        onAdFailedToLoad={(error: Error) => console.error(error)}
+      />
     </Container>
   )
 }
